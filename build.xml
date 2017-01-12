@@ -74,13 +74,13 @@
 
 		<mkdir dir="${Jadoop-build}" />
 
-		<zip destfile="${Jadoop-build}/JadoopCode.zip">
+		<zip destfile="${Jadoop-build}/Jadoop.zip">
 			<zipfileset dir="${Jadoop-code}/src" prefix="src" />
 			<zipfileset dir="${Jadoop-code}/test" prefix="test" />
 			<zipfileset dir="${Jadoop-code}/examples" prefix="examples" />
 			<zipfileset file="${Jadoop-code}/build.xml" />
 			<zipfileset file="${Jadoop-code}/build.properties" />
-			<zipfileset file="${Jadoop-code}/readme.txt" />
+			<zipfileset file="${Jadoop-code}/readme.md" />
 			<zipfileset file="${Jadoop-code}/LICENSE.txt" />
 		</zip>
 
@@ -101,9 +101,9 @@
 		</copy>
 
 		<copy file="${Jadoop-build}/jadoop.jar" todir="${Jadoop-dist}" />
-		<copy file="${Jadoop-build}/JadoopCode.zip" todir="${Jadoop-dist}" />
+		<copy file="${Jadoop-build}/Jadoop.zip" todir="${Jadoop-dist}" />
 
-		<copy file="${Jadoop-code}/readme.txt" todir="${Jadoop-dist}" />
+		<copy file="${Jadoop-code}/readme.md" todir="${Jadoop-dist}" />
 		<copy file="${Jadoop-code}/LICENSE.txt" todir="${Jadoop-dist}" />
 
 		<zip destfile="${Jadoop-home}/JadoopDist.zip"

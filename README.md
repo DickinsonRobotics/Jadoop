@@ -40,7 +40,7 @@ Downloading and unzipping JadoopDist.zip will produce the directory structure:
    +- examples					* Source and .class files for the sample code
    |  +- ...
    +- jadoop.jar				* All of the Jadoop classes in a jar.
-   +- JadoopCode.zip			* All of the source necessary to produce a distriubtion.
+   +- Jadoop.zip			    * All of the source necessary to produce a distriubtion.
    +- LICENSE.txt				* GNU GPL v3
    +- readme.txt				* This file.
 ```
@@ -107,7 +107,7 @@ structure:
 
 ```
 Jadoop
- +- JadoopCode (expanded from JadoopCode.zip)
+ +- Jadoop (expanded from Jadoop.zip)
      +- src
      |  +- jadoop
      |     +- ... java files ...
@@ -125,7 +125,7 @@ Jadoop
      +- LICENSE.txt 
 ```
  
-The JadoopCode directory can be used as the base directory for a project in an 
+The Jadoop directory can be used as the base directory for a project in an 
 IDE (e.g eclipse).  The src, test and examples directories should be added as 
 source directories in the project. The src directory tree contains all of the core 
 functionality of Jadoop.  The test directory contains a collection of JUnit 4 
@@ -167,7 +167,7 @@ To build a Jadoop distribution:
 1. Edit the build.properties files so that: 
   * hadoop.version matches your version of hadoop.
   * hadoop.home points to the root directory your hadoop installation.
-2. In a terminal, change to the Jadoop/JadoopCode directory.
+2. In a terminal, change to the Jadoop/Jadoop directory.
 3. In the terminal, execute: ant dist 
 
 The ant dist task will generate two directories (build and JadoopDist) and one
