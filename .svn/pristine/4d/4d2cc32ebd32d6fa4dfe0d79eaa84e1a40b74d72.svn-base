@@ -1,0 +1,30 @@
+# Hadoop information
+HadoopVersion=2.7.0
+HadoopHome=../hadoop-${HadoopVersion}
+HadoopJars=${HadoopHome}/share/hadoop
+HadoopAPIDocs=http://hadoop.apache.org/docs/stable/api/
+
+# Java information
+JavaAPIDocs=http://docs.oracle.com/javase/8/docs/api/
+
+# Directory containing the Jadoop source code.
+Jadoop-src=src
+
+# Directory containing the Jadoop examples source code.
+Jadoop-ex-src=examples
+
+# Directory containing the Jadoop unit test source code.
+Jadoop-test=test
+
+# Directory in which the distribution will be created.
+Jadoop-dist=../JadoopDist
+
+# Build directory for compiling and generating javadoc that will
+# go into the distribution.
+Jadoop-build=../build
+Jadoop-build-ex=${Jadoop-build}/examples
+
+# Subdirectory for the generation of the javadoc.
+Jadoop-doc=${Jadoop-build}/doc
+
+
