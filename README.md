@@ -30,6 +30,7 @@ Jadoop. If not, see <http://www.gnu.org/licenses/>.
 The Jadoop Distribution can be obtained from:
 
 Downloading and unzipping JadoopDist.zip will produce the directory structure:
+
 ```
   JadoopDist
    +- doc						* JavaDoc for the Jadoop core classes
@@ -103,6 +104,7 @@ The fastest and easiest way to run a Jadoop example program is:
 Create an empty Jadoop directory and expand the JadoopCode.zip file inside 
 the empty Jadoop directory.  This will result in the following directory 
 structure:
+
 ```
 Jadoop
  +- JadoopCode (expanded from JadoopCode.zip)
@@ -133,6 +135,7 @@ code for for a few illustrative examples of Jadoop use.
 A large number of jar files from the hadoop distribution will need to be added to
 the buildpath for your project to get the source and tests to compile and run.  
 These include at least the following:
+
 ```	
 hadoop-2.7.1	(or your version)
  +- share
