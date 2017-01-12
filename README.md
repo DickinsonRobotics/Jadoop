@@ -62,7 +62,6 @@ The fastest and easiest way to run a Jadoop example program is:
      NOTE: If not using a bash shell, the syntax for setting the environment variable
      may vary slightly. 
 ```
-  
 3. 
   a. If you have a hadoop cluster already running, you may need to modify
      the HADOOP_CONFIG set above so that it points to the etc/hadoop directory 
