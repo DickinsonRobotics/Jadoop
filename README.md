@@ -58,7 +58,7 @@ The fastest and easiest way to run a Jadoop example program is:
     export HADOOP_ROOT=$(pwd)
     export HADOOP_CONFIG=$HADOOP_ROOT/etc/hadoop
     export HADOOP_JARS=$HADOOP_ROOT/share/hadoop
-     
+    
     NOTE: If not using a bash shell, the syntax for setting the environment variable
     may vary slightly. 
     ```
@@ -155,7 +155,7 @@ hadoop-2.7.1	(or your version)
 
 To build a Jadoop distribution:
 
-1. Edit the build.properties files so that 
+1. Edit the build.properties files so that: 
   * hadoop.version matches your version of hadoop.
   * hadoop.home points to the root directory your hadoop installation.
 2. In a terminal, change to the Jadoop/JadoopCode directory.
