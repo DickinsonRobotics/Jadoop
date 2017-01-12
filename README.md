@@ -54,6 +54,7 @@ The fastest and easiest way to run a Jadoop example program is:
 2. Open a terminal window with a bash shell, change to the hadoop distribution 
    directory (the one containing the bin, share and etc (and other) directories).  
    Set the following environment variables:
+   
     ```
     export HADOOP_ROOT=$(pwd)
     export HADOOP_CONFIG=$HADOOP_ROOT/etc/hadoop
@@ -62,22 +63,27 @@ The fastest and easiest way to run a Jadoop example program is:
     NOTE: If not using a bash shell, the syntax for setting the environment variable
     may vary slightly. 
     ```
+    
 3. If you have a hadoop cluster already running, you may need to modify
    the HADOOP_CONFIG set above so that it points to the etc/hadoop directory 
    containing your configuration.  Then skip to step 5.
 4. If you do not have a hadoop cluster running, open a second terminal window
    with a bash shell.  Repeat step 2 in this window.  Then launch the hadoop 
    CLI Minicluster using the following commands:
+   
     ```
     export HADOOP_CLASSPATH=$HADOOP_JARS/yarn/test/hadoop-yarn-server-tests-2.7.1-tests.jar
 	$HADOOP_ROOT/bin/hadoop jar $HADOOP_JARS/mapreduce/hadoop-mapreduce-client-jobclient-2.7.1-tests.jar minicluster
     ```
+    
 5. From the terminal used in step 2, change into the JadoopDist directory and run 
    the example:
+   
     ```
     export HADOOP_CLASSPATH=$HADOOP_CONFIG:$HADOOP_JARS/common/*:$HADOOP_JARS/common/lib/*:$HADOOP_JARS/hdfs/*:$HADOOP_JARS/mapreduce/*:$HADOOP_JARS/yarn/*
     java -cp .:examples:$HADOOP_CLASSPATH:jadoop.jar Hostnames
     ```
+    
 6. The output should terminate with a list of the 10 hostnames on which the tasks
    were run.  If the CLI Minicluster was used, this will be 10 copies of the name
    of your machine, otherwise it will be the names of 10 of the machines in the
