@@ -58,16 +58,18 @@ The fastest and easiest way to run a Jadoop example program is:
      export HADOOP_ROOT=$(pwd)
      export HADOOP_CONFIG=$HADOOP_ROOT/etc/hadoop
      export HADOOP_JARS=$HADOOP_ROOT/share/hadoop
+     
+     NOTE: If not using a bash shell, the syntax for setting the environment variable
+     may vary slightly. 
 ```
-NOTE: If not using a bash shell, the syntax for setting the environment variables
-      may vary slightly.   
+  
 3. 
-  * a. If you have a hadoop cluster already running, you may need to modify
-       the HADOOP_CONFIG set above so that it points to the etc/hadoop directory 
-  	   containing your configuration.  Then skip to step 4.
-  * b. If you do not have a hadoop cluster running, open a second terminal window
-  	  with a bash shell.  Repeat step 2 in this window.  Then launch the hadoop 
-  	  CLI Minicluster using the following commands:
+  a. If you have a hadoop cluster already running, you may need to modify
+     the HADOOP_CONFIG set above so that it points to the etc/hadoop directory 
+  	 containing your configuration.  Then skip to step 4.
+  b. If you do not have a hadoop cluster running, open a second terminal window
+  	 with a bash shell.  Repeat step 2 in this window.  Then launch the hadoop 
+  	 CLI Minicluster using the following commands:
 ```  
   		export HADOOP_CLASSPATH=$HADOOP_JARS/yarn/test/hadoop-yarn-server-tests-2.7.1-tests.jar
 		$HADOOP_ROOT/bin/hadoop jar $HADOOP_JARS/mapreduce/hadoop-mapreduce-client-jobclient-2.7.1-tests.jar minicluster
