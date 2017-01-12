@@ -1,9 +1,0 @@
-<project name="Jadoop" basedir=".">
-	<description>
-		Build file for Jadoop - A simple Java API for running
-		grid computing jobs on a hadoop cluster.
-	</description>
-	
-	<target name="init">
-	
-</project>	
