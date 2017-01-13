@@ -40,7 +40,7 @@ Downloading and unzipping JadoopDist.zip will produce the directory structure:
    +- examples					* Source and .class files for the sample code
    |  +- ...
    +- jadoop.jar				* All of the Jadoop classes in a jar.
-   +- Jadoop.zip			    * All of the source necessary to produce a distriubtion.
+   +- JadoopSrc.zip			    * All of the source necessary to produce a distribution.
    +- LICENSE.txt				* GNU GPL v3
    +- readme.txt				* This file.
 ```
@@ -101,13 +101,13 @@ The fastest and easiest way to run a Jadoop example program is:
    
 #Modifying the Jadoop Source:
 
-Create an empty Jadoop directory and expand the JadoopCode.zip file inside 
+Create an empty Jadoop directory and expand the JadoopSrc.zip file inside 
 the empty Jadoop directory.  This will result in the following directory 
 structure:
 
 ```
 Jadoop
- +- Jadoop (expanded from Jadoop.zip)
+ +- JadoopSrc (expanded from JadoopSrc.zip)
      +- src
      |  +- jadoop
      |     +- ... java files ...
