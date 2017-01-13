@@ -27,7 +27,7 @@ Jadoop. If not, see <http://www.gnu.org/licenses/>.
 
 #The Jadoop Distribution:
 
-The Jadoop Distribution can be obtained from: https://github.com/DickinsonRobotics/Jadoop/tree/master
+The Jadoop Distribution can be obtained from: https://github.com/DickinsonRobotics/Jadoop/releases/
 
 Downloading and unzipping JadoopDist.zip will produce the directory structure:
 
