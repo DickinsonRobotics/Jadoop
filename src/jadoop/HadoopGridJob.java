@@ -89,8 +89,8 @@ public class HadoopGridJob {
 	private boolean successful;
 
 	/*
-	 * Some flags used for testing. These control whether particular parts of
-	 * the job processing occur or not.
+	 * Some flags used for testing. These control whether particular parts of the
+	 * job processing occur or not.
 	 */
 	private boolean testing;
 	private boolean makeTempDir;
@@ -102,8 +102,8 @@ public class HadoopGridJob {
 	private boolean submitJob;
 
 	/*
-	 * Wait 3 seconds between each poll of the cluster to determine if the job
-	 * has completed.
+	 * Wait 3 seconds between each poll of the cluster to determine if the job has
+	 * completed.
 	 */
 	private static final int JOB_MONITOR_DELAY = 3000;
 
@@ -111,16 +111,16 @@ public class HadoopGridJob {
 
 	/**
 	 * Construct a new HadoopGridJob with the specified name. A default
-	 * org.apache.hadoop.conf.Configuration object will be created and used for
-	 * the job by passing it to the 2-arg constructor. The default timeout for a
-	 * new HadoopGridJob is 10 minutes.
+	 * org.apache.hadoop.conf.Configuration object will be created and used for the
+	 * job by passing it to the 2-arg constructor. The default timeout for a new
+	 * HadoopGridJob is 10 minutes.
 	 * 
 	 * @param name
-	 *            the name for the HadoopGridJob. This name will also be the
-	 *            name of the job submitted to Hadoop and thus may be useful if
-	 *            observing the Hadoop cluster with other tools. This is also
-	 *            the name of the temporary working directory on the HDFS, and
-	 *            thus must be a valid directory name.
+	 *            the name for the HadoopGridJob. This name will also be the name of
+	 *            the job submitted to Hadoop and thus may be useful if observing
+	 *            the Hadoop cluster with other tools. This is also the name of the
+	 *            temporary working directory on the HDFS, and thus must be a valid
+	 *            directory name.
 	 * @throws IOException
 	 *             propagated from the org.apache.hadoop.conf.Configuration
 	 *             constructor.
@@ -131,8 +131,8 @@ public class HadoopGridJob {
 
 	/**
 	 * Construct a new HadoopGridJob with the specified name and the provided
-	 * org.apache.hadoop.conf.Configuration. The default timeout for a
-	 * HadoopGridJob is 10 minutes.
+	 * org.apache.hadoop.conf.Configuration. The default timeout for a HadoopGridJob
+	 * is 10 minutes.
 	 * 
 	 * The following properties in the Configuration object will be overwritten,
 	 * thus any values set in the provided object will be ignored:
@@ -148,17 +148,16 @@ public class HadoopGridJob {
 	 * </UL>
 	 * 
 	 * @param name
-	 *            the name for the HadoopGridJob. This name will also be the
-	 *            name of the job submitted to Hadoop and thus may be useful if
-	 *            observing the Hadoop cluster with other tools. This is also
-	 *            the name of the temporary working directory on the HDFS, and
-	 *            thus must be a valid directory name.
+	 *            the name for the HadoopGridJob. This name will also be the name of
+	 *            the job submitted to Hadoop and thus may be useful if observing
+	 *            the Hadoop cluster with other tools. This is also the name of the
+	 *            temporary working directory on the HDFS, and thus must be a valid
+	 *            directory name.
 	 * @param config
 	 *            a Hadoop Configuration object to be used for submission of the
-	 *            job. The provided Configuration object is cloned for use in
-	 *            the job. Thus, subsequent changes to the provided
-	 *            Configuration will not affect the Configuration being used for
-	 *            the job.
+	 *            job. The provided Configuration object is cloned for use in the
+	 *            job. Thus, subsequent changes to the provided Configuration will
+	 *            not affect the Configuration being used for the job.
 	 * @throws IOException
 	 *             propagated from the org.apache.hadoop.conf.Configuration
 	 *             constructor used to clone the one provided.
@@ -167,8 +166,8 @@ public class HadoopGridJob {
 		jobName = name;
 
 		/*
-		 * NOTE: Job makes its own copy of config, so we use the one from job
-		 * anytime we need it rather than keeping a reference to config.
+		 * NOTE: Job makes its own copy of config, so we use the one from job anytime we
+		 * need it rather than keeping a reference to config.
 		 */
 		job = Job.getInstance(config, jobName);
 		job.setNumReduceTasks(0); // only map tasks
@@ -186,10 +185,10 @@ public class HadoopGridJob {
 		timedout = false;
 
 		/*
-		 * Testing is false so that things run as normal unless this is changed
-		 * by a call to one of the private helpers at the bottom of the file.
-		 * Those are used by the tests to set the appropriate values to true for
-		 * what is being tested by the test.
+		 * Testing is false so that things run as normal unless this is changed by a
+		 * call to one of the private helpers at the bottom of the file. Those are used
+		 * by the tests to set the appropriate values to true for what is being tested
+		 * by the test.
 		 */
 		testing = false;
 		makeTempDir = false;
@@ -204,10 +203,10 @@ public class HadoopGridJob {
 	}
 
 	/*
-	 * NOTE: All of the following accessors could compute their results but
-	 * instead rely on fields set during the processing of the results by the
-	 * JobMonitor and/or processResults method. That way they are only computed
-	 * once rather than on each call.
+	 * NOTE: All of the following accessors could compute their results but instead
+	 * rely on fields set during the processing of the results by the JobMonitor
+	 * and/or processResults method. That way they are only computed once rather
+	 * than on each call.
 	 */
 
 	/**
@@ -221,9 +220,9 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Check to see if this job has finished. A job has finished if all of the
-	 * tasks contained in the job have finished (completed, failed, terminated
-	 * or timed out).
+	 * Check to see if this job has finished. A job has finished if all of the tasks
+	 * contained in the job have finished (completed, failed, terminated or timed
+	 * out).
 	 * 
 	 * @return true if this job has finished.
 	 */
@@ -232,8 +231,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Check to see if this job is currently running. A job is considered
-	 * running if it has been started but has not yet finished.
+	 * Check to see if this job is currently running. A job is considered running if
+	 * it has been started but has not yet finished.
 	 * 
 	 * @return true if this job is running, false if not
 	 */
@@ -242,8 +241,7 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Check to see if this job was terminated (via a call to the terminate
-	 * method).
+	 * Check to see if this job was terminated (via a call to the terminate method).
 	 * 
 	 * @return true if this job was terminated.
 	 */
@@ -262,8 +260,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Check if all of the tasks in this job have completed successfully (i.e.
-	 * they are finished and the task command gave an exit value of 0.)
+	 * Check if all of the tasks in this job have completed successfully (i.e. they
+	 * are finished and the task command gave an exit value of 0.)
 	 * 
 	 * @return true if all tasks have completed successfully, false if not.
 	 */
@@ -274,8 +272,7 @@ public class HadoopGridJob {
 	/**
 	 * Get a clone of the configuration being used for this HadoopGridJob.
 	 * 
-	 * @return a clone of this job's org.apache.hadoop.conf.Configuration
-	 *         object.
+	 * @return a clone of this job's org.apache.hadoop.conf.Configuration object.
 	 */
 	public Configuration getConfiguration() {
 		Configuration cloneConf = new Configuration(job.getConfiguration());
@@ -283,8 +280,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Get the org.apache.hadoop.mapreduce.Job that this HadoopGridJob is using
-	 * to interact with hadoop.
+	 * Get the org.apache.hadoop.mapreduce.Job that this HadoopGridJob is using to
+	 * interact with hadoop.
 	 * 
 	 * @return the Job.
 	 */
@@ -294,18 +291,18 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Add a HadoopGridTask to this HadoopGridJob. The task will be retrievable
-	 * by the key specified in the task. This method throws an exception if
-	 * another task has already been added with the same key. To replace a task
-	 * with the same key the existing task must be removed first and then the
-	 * new task can be added.
+	 * Add a HadoopGridTask to this HadoopGridJob. The task will be retrievable by
+	 * the key specified in the task. This method throws an exception if another
+	 * task has already been added with the same key. To replace a task with the
+	 * same key the existing task must be removed first and then the new task can be
+	 * added.
 	 * 
 	 * @param task
 	 *            the HadoopGridTask to be added to this HadoopGridJob.
 	 * 
 	 * @throws KeyAlreadyExistsException
-	 *             if this HadoopGridJob already contains a task with the same
-	 *             key as specified in the given task.
+	 *             if this HadoopGridJob already contains a task with the same key
+	 *             as specified in the given task.
 	 * @throws IllegalStateException
 	 *             if this HadoopGridJob has already been started.
 	 * 
@@ -317,8 +314,8 @@ public class HadoopGridJob {
 		}
 
 		if (taskMap.get(task.getKey()) != null) {
-			throw new KeyAlreadyExistsException(
-					"There is already a task with the same key " + "as the one you are trying to add to the job.");
+			throw new KeyAlreadyExistsException("There is already a task with the same key (" + task.getKey()
+					+ ") as the one you are trying to add to the job.");
 		} else {
 			taskMap.put(task.getKey(), task);
 		}
@@ -338,17 +335,16 @@ public class HadoopGridJob {
 	 * 
 	 * @param key
 	 *            the key of the task to be retrieved.
-	 * @return the HadoopGridTask with the given key or null if no such task
-	 *         exists.
+	 * @return the HadoopGridTask with the given key or null if no such task exists.
 	 */
 	public HadoopGridTask getTask(String key) {
 		return taskMap.get(key);
 	}
 
 	/**
-	 * Get a list of all of the HadoopGridTasks contained in this HadoopGridJob.
-	 * If this HadoopGridJob is complete then each task will contain the results
-	 * (e.g. exit value, standard output, standard error) generated by the task.
+	 * Get a list of all of the HadoopGridTasks contained in this HadoopGridJob. If
+	 * this HadoopGridJob is complete then each task will contain the results (e.g.
+	 * exit value, standard output, standard error) generated by the task.
 	 * 
 	 * @return a list of the HaddopGridTasks in this HadoopGridJob.
 	 */
@@ -361,20 +357,19 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Add all of the HadoopGridTasks contained in the List to this
-	 * HadoopGridJob. Each task will be retrievable by the key specified in the
-	 * task object. This method operates by invoking addTask on each of the
-	 * individual tasks.
+	 * Add all of the HadoopGridTasks contained in the List to this HadoopGridJob.
+	 * Each task will be retrievable by the key specified in the task object. This
+	 * method operates by invoking addTask on each of the individual tasks.
 	 * 
 	 * @param tasks
 	 *            a list of HadoopGridTasks to be added to this HadoopGridJob.
 	 * 
 	 * @throws KeyAlreadyExistsException
-	 *             if this HadoopGridJob already contains a task with the same
-	 *             key as that specified in any of the given tasks.
+	 *             if this HadoopGridJob already contains a task with the same key
+	 *             as that specified in any of the given tasks.
 	 * @throws IllegalStateException
-	 *             if this HadoopGridJob is currently running or has already
-	 *             been completed.
+	 *             if this HadoopGridJob is currently running or has already been
+	 *             completed.
 	 * 
 	 * @see #addTask(HadoopGridTask)
 	 */
@@ -391,8 +386,8 @@ public class HadoopGridJob {
 	 *            the key of the HadoopGridTask to be removed.
 	 * 
 	 * @throws IllegalStateException
-	 *             if this HadoopGridJob is currently running or has already
-	 *             been completed.
+	 *             if this HadoopGridJob is currently running or has already been
+	 *             completed.
 	 */
 	public void removeTask(String key) {
 		if (started) {
@@ -403,13 +398,12 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Set the timeout period for the job. If the job takes longer than this
-	 * amount of wall clock time it will be terminated. Terminating the job will
-	 * terminate all tasks and no results from any task will be available.
-	 * Generally it is preferable to rely on timeouts for the individuals
-	 * HadoopGridTasks instead so that results from completed tasks are
-	 * available. If no timeout is desired, set this to Long.MAX_VALUE, which is
-	 * the default value.
+	 * Set the timeout period for the job. If the job takes longer than this amount
+	 * of wall clock time it will be terminated. Terminating the job will terminate
+	 * all tasks and no results from any task will be available. Generally it is
+	 * preferable to rely on timeouts for the individuals HadoopGridTasks instead so
+	 * that results from completed tasks are available. If no timeout is desired,
+	 * set this to Long.MAX_VALUE, which is the default value.
 	 * 
 	 * @param ms
 	 *            the task timeout in milliseconds.
@@ -441,8 +435,8 @@ public class HadoopGridJob {
 	 * When the job is run (i.e. runJob is invoked), the specified file will be
 	 * copied to a temporary working directory on the hadoop HDFS and then made
 	 * available in the task's working directory via Hadoop's distributed cache.
-	 * When the job is complete, the temporary working directory, along with
-	 * this file will be deleted from the HDFS.
+	 * When the job is complete, the temporary working directory, along with this
+	 * file will be deleted from the HDFS.
 	 * 
 	 * @param dataFile
 	 *            a File object referring to the file on the local filesystem.
@@ -453,8 +447,8 @@ public class HadoopGridJob {
 		}
 
 		/*
-		 * Just hold the file for now. Later it will be placed into the HDFS so
-		 * that it is available to the map task.
+		 * Just hold the file for now. Later it will be placed into the HDFS so that it
+		 * is available to the map task.
 		 */
 		files.add(dataFile);
 	}
@@ -463,23 +457,21 @@ public class HadoopGridJob {
 	 * Add an archive (jar file) to the list of archives that will be available
 	 * (read-only) to the HadoopGridTasks in their working directory.
 	 * 
-	 * When the job is run (i.e. when runJob is invoked), a sub-directory with
-	 * the same name as the archive will be created within the temporary working
+	 * When the job is run (i.e. when runJob is invoked), a sub-directory with the
+	 * same name as the archive will be created within the temporary working
 	 * directory on the Hadoop HDFS. The archive will be expanded within that
-	 * sub-directory. The sub-directory will be made available in the tasks'
-	 * working directory via Hadoop's distributed cache.
+	 * sub-directory. The sub-directory will be made available in the tasks' working
+	 * directory via Hadoop's distributed cache.
 	 * 
-	 * When the job is complete, the temporary working directory, the
-	 * sub-directory for the archive and any files and directories created by
-	 * expanding the archive will be deleted.
+	 * When the job is complete, the temporary working directory, the sub-directory
+	 * for the archive and any files and directories created by expanding the
+	 * archive will be deleted.
 	 * 
 	 * @param archiveFile
-	 *            a File object referring to the archive on the local
-	 *            filesystem.
+	 *            a File object referring to the archive on the local filesystem.
 	 * 
 	 * @throws IllegalStateException
-	 *             if this job is currently running or has already been
-	 *             completed.
+	 *             if this job is currently running or has already been completed.
 	 */
 	public void addArchive(File archiveFile) {
 		if (started) {
@@ -487,25 +479,24 @@ public class HadoopGridJob {
 		}
 
 		/*
-		 * Just hold the archive file for now. Later it will be placed into the
-		 * HDFS so that it is available to the map task.
+		 * Just hold the archive file for now. Later it will be placed into the HDFS so
+		 * that it is available to the map task.
 		 */
 		archives.add(archiveFile);
 	}
 
 	/**
-	 * Run all of the HadoopGridTasks in this job on the Hadoop cluster. When
-	 * all of the tasks have finished execution (completed, failed, terminated
-	 * or timed out) the results of the tasks are parsed and placed into the
-	 * HadoopGridTask objects. Once all of the results have been processed the
-	 * job will be marked as finished (and timedout and/or terminated as
-	 * appropriate)
+	 * Run all of the HadoopGridTasks in this job on the Hadoop cluster. When all of
+	 * the tasks have finished execution (completed, failed, terminated or timed
+	 * out) the results of the tasks are parsed and placed into the HadoopGridTask
+	 * objects. Once all of the results have been processed the job will be marked
+	 * as finished (and timedout and/or terminated as appropriate)
 	 * 
 	 * @param wait
 	 *            true to cause this method to wait until all of the tasks have
-	 *            completed, failed, terminated or timed out, and all of the
-	 *            results have been processed, before this method returns. False
-	 *            to return immediately.
+	 *            completed, failed, terminated or timed out, and all of the results
+	 *            have been processed, before this method returns. False to return
+	 *            immediately.
 	 * 
 	 * @throws IllegalStateException
 	 *             if this job has already been started
@@ -514,16 +505,16 @@ public class HadoopGridJob {
 	 *             propagated from the org.apache.hadoop.mapreduce.Job.submit
 	 *             method.
 	 * @throws InterruptedException
-	 *             if interrupted while waiting for the HadoopGridTasks to
-	 *             complete. This is propagated from the
+	 *             if interrupted while waiting for the HadoopGridTasks to complete.
+	 *             This is propagated from the
 	 *             org.apache.hadoop.mapreduce.Job.submit method.
 	 * @throws ClassNotFoundException
-	 *             if a class needed to execute the HadoopGridTasks cannot be
-	 *             found. This is propagated from the
+	 *             if a class needed to execute the HadoopGridTasks cannot be found.
+	 *             This is propagated from the
 	 *             org.apache.hadoop.mapreduce.Job.submit method.
 	 * @throws URISyntaxException
-	 *             if there is a problem generating the URIs used to add the
-	 *             files and archives to the hadoop distributed cache.
+	 *             if there is a problem generating the URIs used to add the files
+	 *             and archives to the hadoop distributed cache.
 	 */
 	public void runJob(boolean wait) throws IllegalStateException, IOException, InterruptedException,
 			ClassNotFoundException, URISyntaxException {
@@ -533,23 +524,22 @@ public class HadoopGridJob {
 		}
 
 		/*
-		 * When a HadoopGridJob is started, a temporary working directory is
-		 * created on the Hadoop HDFS. This directory will be prefaced with the
-		 * job's name and will include additional digits to make it unique so
-		 * that it does not conflict with any other directory on the HDFS. The
-		 * file listing all of the tasks to be run will be written to this
-		 * directory. Any files or archives that have been added to the job used
-		 * by are also moved to this directory. From there files and archives
-		 * being used are added to the job's hadoop distribued cache. Upon
-		 * completion of the HadoopGridJob, this working directory and all of
-		 * its contents are removed from the HDFS.
+		 * When a HadoopGridJob is started, a temporary working directory is created on
+		 * the Hadoop HDFS. This directory will be prefaced with the job's name and will
+		 * include additional digits to make it unique so that it does not conflict with
+		 * any other directory on the HDFS. The file listing all of the tasks to be run
+		 * will be written to this directory. Any files or archives that have been added
+		 * to the job used by are also moved to this directory. From there files and
+		 * archives being used are added to the job's hadoop distribued cache. Upon
+		 * completion of the HadoopGridJob, this working directory and all of its
+		 * contents are removed from the HDFS.
 		 */
 
 		FileSystem fs = FileSystem.get(job.getConfiguration());
 
 		/*
-		 * Mark the job and all of the tasks as started. Their completion status
-		 * is taken care of in the processResults method.
+		 * Mark the job and all of the tasks as started. Their completion status is
+		 * taken care of in the processResults method.
 		 */
 		started = true;
 		for (HadoopGridTask hgt : taskMap.values()) {
@@ -557,9 +547,9 @@ public class HadoopGridJob {
 		}
 
 		/*
-		 * NOTE: Flag checks below are to facilitate incremental focused testing
-		 * of each part of the run process. Flags are set in the test class as
-		 * appropriate to each test.
+		 * NOTE: Flag checks below are to facilitate incremental focused testing of each
+		 * part of the run process. Flags are set in the test class as appropriate to
+		 * each test.
 		 */
 
 		Path tempHDFSWorkingDir = null;
@@ -615,16 +605,15 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Terminates any currently running tasks in this job. This method will
-	 * block until all of the tasks in the job have been terminated. If the job
-	 * is not currently running this method has no effect.
+	 * Terminates any currently running tasks in this job. This method will block
+	 * until all of the tasks in the job have been terminated. If the job is not
+	 * currently running this method has no effect.
 	 */
 	public void terminate() {
 		if (isRunning()) {
 			/*
-			 * NOTE: We don't do the termination here. Just set a flag and let
-			 * the JobMonitor thread detect it and then do the termination
-			 * there.
+			 * NOTE: We don't do the termination here. Just set a flag and let the
+			 * JobMonitor thread detect it and then do the termination there.
 			 */
 			terminated = true;
 			try {
@@ -636,18 +625,18 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Get the status information from the underlying Hadoop Job that is running
-	 * the HadoopGridTasks.
+	 * Get the status information from the underlying Hadoop Job that is running the
+	 * HadoopGridTasks.
 	 * 
 	 * @return the JobStatus for the Haddop Job.
 	 * 
 	 * @throws IOException
-	 *             if there is a problem getting the status of the Hadoop Job.
-	 *             This is propagated from the
-	 *             org.apache.hadoop.mapreduce.Job.getStatus method.
+	 *             if there is a problem getting the status of the Hadoop Job. This
+	 *             is propagated from the org.apache.hadoop.mapreduce.Job.getStatus
+	 *             method.
 	 * @throws InterruptedException
-	 *             if interrupted while waiting for the HadoopGridTasks to
-	 *             complete. This is propagated from the
+	 *             if interrupted while waiting for the HadoopGridTasks to complete.
+	 *             This is propagated from the
 	 *             org.apache.hadoop.mapreduce.Job.getStatus method.
 	 */
 	public JobStatus getStatus() throws IOException, InterruptedException {
@@ -655,18 +644,18 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Print periodic messages regarding the status of the running Hadoop job.
-	 * This method will monitor the jobs and print information about completed,
-	 * failed and killed tasks. It returns when all tasks have been completed,
-	 * failed or killed.
+	 * Print periodic messages regarding the status of the running Hadoop job. This
+	 * method will monitor the jobs and print information about completed, failed
+	 * and killed tasks. It returns when all tasks have been completed, failed or
+	 * killed.
 	 * 
 	 * @throws IOException
-	 *             if there is a problem getting the status of the Hadoop Job.
-	 *             This is propagated from the
+	 *             if there is a problem getting the status of the Hadoop Job. This
+	 *             is propagated from the
 	 *             org.apache.hadoop.mapreduce.Job.monitorAndPrintJob method.
 	 * @throws InterruptedException
-	 *             if interrupted while waiting for the HadoopGridTasks to
-	 *             complete. This is propagated from the
+	 *             if interrupted while waiting for the HadoopGridTasks to complete.
+	 *             This is propagated from the
 	 *             org.apache.hadoop.mapreduce.Job.monitorAndPrintJob method.
 	 */
 	public void monitorAndPrintJob() throws IOException, InterruptedException {
@@ -675,17 +664,15 @@ public class HadoopGridJob {
 
 	/**
 	 * Creates a temporary working directory on the hadoop HDFS for the job that
-	 * will be running. The name of this temporary directory will be the name
-	 * given to the job. If there is an existing directory with the same name as
-	 * the job's name, this method generate a new name that will be used so that
-	 * the temporary directory does not share a name with another directory on
-	 * the HDFS.
+	 * will be running. The name of this temporary directory will be the name given
+	 * to the job. If there is an existing directory with the same name as the job's
+	 * name, this method generate a new name that will be used so that the temporary
+	 * directory does not share a name with another directory on the HDFS.
 	 * 
 	 * @return the path of the new temporary working directory on the HDFS
 	 * 
 	 * @throws IOException
-	 *             if there is a problem creating the temporary working
-	 *             directory.
+	 *             if there is a problem creating the temporary working directory.
 	 */
 	private Path createTemporaryDirectory(FileSystem fs) throws IOException {
 		// path to the HDFS system
@@ -713,20 +700,20 @@ public class HadoopGridJob {
 	/**
 	 * Copies the file(s) on the local machine onto the temporary HDFS working
 	 * directory and make them available in the hadoop distributed cache so that
-	 * they appear in the working directory of the HadoopGridTask(s) when they
-	 * are running
+	 * they appear in the working directory of the HadoopGridTask(s) when they are
+	 * running
 	 * 
 	 * @param fs
 	 *            the hadoop HDFS filesystem
 	 * @param hdfsDirectory
-	 *            the path to the temporary working directory on the HDFS to
-	 *            which the files are to be copied.
+	 *            the path to the temporary working directory on the HDFS to which
+	 *            the files are to be copied.
 	 * @throws IOException
 	 *             if there is a problem copying the files to the HDFS or adding
 	 *             them to the hadoop distributed cache.
 	 * @throws URISyntaxException
-	 *             if there is a problem generating the URI used to add the file
-	 *             to the hadoop distributed cache.
+	 *             if there is a problem generating the URI used to add the file to
+	 *             the hadoop distributed cache.
 	 */
 	private void copyLocalFileToHDFS(FileSystem fs, Path hdfsDirectory) throws IOException, URISyntaxException {
 
@@ -735,18 +722,17 @@ public class HadoopGridJob {
 			Path fileRelativePath = new Path(localFile.getPath());
 
 			/*
-			 * copy the file from the local file system to the temporary working
-			 * directory on the HDFS.
+			 * copy the file from the local file system to the temporary working directory
+			 * on the HDFS.
 			 */
 			fs.copyFromLocalFile(fileRelativePath, hdfsDirectory);
 
 			/*
-			 * Build a URI to the file on the HDFS so we can add it to the
-			 * working cache.
+			 * Build a URI to the file on the HDFS so we can add it to the working cache.
 			 * 
-			 * The value before the # gives the name of the file on the HDFS,
-			 * the value after the # gives the name that the file will have in
-			 * the cache (i.e. the working directory of the tasks).
+			 * The value before the # gives the name of the file on the HDFS, the value
+			 * after the # gives the name that the file will have in the cache (i.e. the
+			 * working directory of the tasks).
 			 */
 			URI uri = new URI(hdfsDirectory + "/" + localFile.getName() + "#" + localFile.getName());
 
@@ -755,24 +741,24 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Copies the archive file(s) on the local machine into the temporary
-	 * working directory on the hadoop HDFS. And also be makes them available in
-	 * the distributed working cache so the HadoopGridTask(s) can access them in
-	 * their working directory. Once the archive file(s) have been copied onto
-	 * the HDFS, a directory with the archive file(s)'s name will be created and
-	 * the contents of archive file(s) will unpacked into that directory
+	 * Copies the archive file(s) on the local machine into the temporary working
+	 * directory on the hadoop HDFS. And also be makes them available in the
+	 * distributed working cache so the HadoopGridTask(s) can access them in their
+	 * working directory. Once the archive file(s) have been copied onto the HDFS, a
+	 * directory with the archive file(s)'s name will be created and the contents of
+	 * archive file(s) will unpacked into that directory
 	 * 
 	 * @param fs
 	 *            the hadoop HDFS file system
 	 * @param hdfsDirectory
-	 *            path to the temporary working directory on the HDFS to which
-	 *            the archives are to be copied.
+	 *            path to the temporary working directory on the HDFS to which the
+	 *            archives are to be copied.
 	 * @throws IOException
-	 *             if there is a problem copying the archives to the HDFS or
-	 *             adding them to the hadoop distributed cache.
+	 *             if there is a problem copying the archives to the HDFS or adding
+	 *             them to the hadoop distributed cache.
 	 * @throws URISyntaxException
-	 *             if there is a problem generating the URI used to add the
-	 *             archive to the hadoop distributed cache.
+	 *             if there is a problem generating the URI used to add the archive
+	 *             to the hadoop distributed cache.
 	 */
 	private void copyLocalArchiveToHDFS(FileSystem fs, Path hdfsDirectory) throws IOException, URISyntaxException {
 		for (File localArchive : archives) {
@@ -786,14 +772,14 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Creates a directory named "input" in the temporary working directory on
-	 * the hadoop HDFS.
+	 * Creates a directory named "input" in the temporary working directory on the
+	 * hadoop HDFS.
 	 * 
 	 * @param fs
 	 *            the hadoop HDFS file system
 	 * @param hdfsDirectory
-	 *            path to the temporary working directory on the HDFS in which
-	 *            the input directory is to be created.
+	 *            path to the temporary working directory on the HDFS in which the
+	 *            input directory is to be created.
 	 * 
 	 * @return a path to the input directory that was created.
 	 * 
@@ -808,11 +794,10 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Create a tasks.seq sequence file in the input directory for each task.
-	 * This file contains the key and command that defines the map task. The key
-	 * is the key that was associated with the task when it was added to the
-	 * job. The value is an TextArrayWritable object with the following
-	 * contents:
+	 * Create a tasks.seq sequence file in the input directory for each task. This
+	 * file contains the key and command that defines the map task. The key is the
+	 * key that was associated with the task when it was added to the job. The value
+	 * is an TextArrayWritable object with the following contents:
 	 * <UL>
 	 * <LI>true/false - indicating if standard output is to be captured.
 	 * <LI>true/false - indicating if standard error is to be captured.
@@ -823,22 +808,21 @@ public class HadoopGridJob {
 	 * @see HadoopGridTaskRunner
 	 * 
 	 * @param hdfsInputDir
-	 *            the input directory on the HDFS where the tasks.seq file is to
-	 *            be created.
+	 *            the input directory on the HDFS where the tasks.seq file is to be
+	 *            created.
 	 * 
 	 * @throws IOException
 	 *             if there is a problem creating the tasks.seq file.
 	 */
 	private void writeTasksSequenceFiles(Path hdfsInputDir) throws IOException {
 		/*
-		 * Seems as if we should be able to just write one task file with
-		 * multiple key/value pairs in it. However, hadoop did not seem to want
-		 * to send each entry to a different node. Rather one node processed
-		 * many of the tasks. It seems as if this could be fixed by defining how
-		 * hadoop is to split up the sequence file, but we were unable to get
-		 * that to work. Writing a different task file for each task is a bit of
-		 * a hack solution, but it works. Each task is then run on a different
-		 * node, as desired.
+		 * Seems as if we should be able to just write one task file with multiple
+		 * key/value pairs in it. However, hadoop did not seem to want to send each
+		 * entry to a different node. Rather one node processed many of the tasks. It
+		 * seems as if this could be fixed by defining how hadoop is to split up the
+		 * sequence file, but we were unable to get that to work. Writing a different
+		 * task file for each task is a bit of a hack solution, but it works. Each task
+		 * is then run on a different node, as desired.
 		 */
 
 		Text mapperKey = new Text();
@@ -861,9 +845,9 @@ public class HadoopGridJob {
 			mapperKey.set(taskKey);
 
 			/*
-			 * Build an array of Writeable holding the flags that indicate if
-			 * standard output/error are to be captured, the timeout and the
-			 * command and its arguments.
+			 * Build an array of Writeable holding the flags that indicate if standard
+			 * output/error are to be captured, the timeout and the command and its
+			 * arguments.
 			 */
 			Writable[] vals = new Writable[taskVal.length + 3];
 
@@ -878,8 +862,7 @@ public class HadoopGridJob {
 			}
 
 			/*
-			 * Set the value for the sequence file entry for this task to be the
-			 * array.
+			 * Set the value for the sequence file entry for this task to be the array.
 			 */
 			mapperVal.set(vals);
 
@@ -892,10 +875,10 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Process the results that were returned by the Hadoop job. Each result
-	 * will be a key value pair with the format specified in the
-	 * HadoopGridTaskRunner class. The results for each key should be parsed and
-	 * placed into the HadoopGridTask object with the same key.
+	 * Process the results that were returned by the Hadoop job. Each result will be
+	 * a key value pair with the format specified in the HadoopGridTaskRunner class.
+	 * The results for each key should be parsed and placed into the HadoopGridTask
+	 * object with the same key.
 	 * 
 	 * @see HadoopGridTaskRunner
 	 * 
@@ -907,8 +890,8 @@ public class HadoopGridJob {
 		FileStatus[] fileStatus = fs.listStatus(outDir);
 
 		/*
-		 * Process the results for all of the tasks that have completed. Any
-		 * task that did not complete will be included in any file.
+		 * Process the results for all of the tasks that have completed. Any task that
+		 * did not complete will be included in any file.
 		 */
 		for (FileStatus file : fileStatus) {
 			String fileName = file.getPath().getName();
@@ -923,9 +906,8 @@ public class HadoopGridJob {
 				MapWritable mapperOutputVal = new MapWritable();
 
 				/*
-				 * If multiple tasks are sent to the same node then the response
-				 * file will contain multiple entries. Be sure to process each
-				 * one of them.
+				 * If multiple tasks are sent to the same node then the response file will
+				 * contain multiple entries. Be sure to process each one of them.
 				 */
 				while (reader.next(mapperOutputKey, mapperOutputVal)) {
 					// Get the value returned from the HadoopGridTaskRunner.
@@ -976,12 +958,11 @@ public class HadoopGridJob {
 		}
 
 		/**
-		 * This method periodically checks to see if all of the tasks in the job
-		 * have completed or have been killed. When all of the tasks are
-		 * complete, failed or killed it calls a method that processes the
-		 * returned key,value pairs and fills in the fields in the associated
-		 * HadoopGridTask objects. When all results have been processed the
-		 * finished and correct flags are set.
+		 * This method periodically checks to see if all of the tasks in the job have
+		 * completed or have been killed. When all of the tasks are complete, failed or
+		 * killed it calls a method that processes the returned key,value pairs and
+		 * fills in the fields in the associated HadoopGridTask objects. When all
+		 * results have been processed the finished and correct flags are set.
 		 */
 		@Override
 		public void run() {
@@ -1007,9 +988,9 @@ public class HadoopGridJob {
 				}
 
 				/*
-				 * If a job is terminated then we cannot get any results from
-				 * hadoop because they are not available on the HDFS, only a
-				 * _temprorary file exits in the working directory.
+				 * If a job is terminated then we cannot get any results from hadoop because
+				 * they are not available on the HDFS, only a _temprorary file exits in the
+				 * working directory.
 				 */
 				if (!terminated) {
 					processResults(fs, outputDir);
@@ -1019,16 +1000,15 @@ public class HadoopGridJob {
 				fs.delete(tempWorkingDir, true);
 			} catch (Exception e) {
 				/*
-				 * Don't really want to kill everything... and this cannot be
-				 * easily caught... so print it out mark the unfinished tasks as
-				 * appropriate (in finally) and get on with it.
+				 * Don't really want to kill everything... and this cannot be easily caught...
+				 * so print it out mark the unfinished tasks as appropriate (in finally) and get
+				 * on with it.
 				 */
 				e.printStackTrace();
 			} finally {
 				/*
-				 * Any tasks not already marked as finished by the
-				 * processResults method should be marked as terminated and
-				 * timedout (if appropriate)
+				 * Any tasks not already marked as finished by the processResults method should
+				 * be marked as terminated and timedout (if appropriate)
 				 */
 				for (HadoopGridTask task : taskMap.values()) {
 					if (!task.hasFinished()) {
@@ -1041,9 +1021,8 @@ public class HadoopGridJob {
 				}
 
 				/*
-				 * Mark the job as successful if all of the tasks have an exit
-				 * code of 0. Could be combined with above loop, but seemed more
-				 * clear this way.
+				 * Mark the job as successful if all of the tasks have an exit code of 0. Could
+				 * be combined with above loop, but seemed more clear this way.
 				 */
 				successful = true;
 				for (HadoopGridTask hgt : taskMap.values()) {
@@ -1051,10 +1030,9 @@ public class HadoopGridJob {
 				}
 
 				/*
-				 * Do this only at the end so that we can be sure that all of
-				 * the results have been processed before a call to
-				 * hasFinished() will return true - i.e. if runJob was not asked
-				 * to wait and the user code is polling.
+				 * Do this only at the end so that we can be sure that all of the results have
+				 * been processed before a call to hasFinished() will return true - i.e. if
+				 * runJob was not asked to wait and the user code is polling.
 				 */
 				finished = true;
 			}
@@ -1062,9 +1040,8 @@ public class HadoopGridJob {
 	}
 
 	/*
-	 * There are a number of private methods below here that are used by the
-	 * tests. The tests invoke them via reflection so that they can remain
-	 * private.
+	 * There are a number of private methods below here that are used by the tests.
+	 * The tests invoke them via reflection so that they can remain private.
 	 */
 
 	/**
@@ -1136,8 +1113,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Mark the makeTempDir variable so that the temporary directory is created.
-	 * For testing purposes.
+	 * Mark the makeTempDir variable so that the temporary directory is created. For
+	 * testing purposes.
 	 */
 	@SuppressWarnings("unused")
 	private void makeTempDir() {
@@ -1157,8 +1134,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Mark the copyFiles variable so that the archives are copied to the HDFS.
-	 * For testing purposes.
+	 * Mark the copyFiles variable so that the archives are copied to the HDFS. For
+	 * testing purposes.
 	 */
 	@SuppressWarnings("unused")
 	private void copyArchives() {
@@ -1168,8 +1145,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Mark the makeInputDir variable so that the input directory is created on
-	 * the HDFS. For testing purposes.
+	 * Mark the makeInputDir variable so that the input directory is created on the
+	 * HDFS. For testing purposes.
 	 */
 	@SuppressWarnings("unused")
 	private void makeInputDir() {
@@ -1179,8 +1156,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Mark the writeTasksFile variable so that the tasks sequence file is
-	 * created in the input directory. For testing purposes.
+	 * Mark the writeTasksFile variable so that the tasks sequence file is created
+	 * in the input directory. For testing purposes.
 	 */
 	@SuppressWarnings("unused")
 	private void writeTasksFile() {
@@ -1202,8 +1179,8 @@ public class HadoopGridJob {
 	}
 
 	/**
-	 * Mark the submitJob variable so that the job is submitted to the cluster.
-	 * For testing purposes.
+	 * Mark the submitJob variable so that the job is submitted to the cluster. For
+	 * testing purposes.
 	 */
 	@SuppressWarnings("unused")
 	private void submitJob() {
