@@ -159,6 +159,7 @@ public class HadoopGridJobNoClusterTest extends TestCase {
 			hgj.addTask(hgt4);
 			fail("Should not be able to add two tasks with the same key");
 		} catch (KeyAlreadyExistsException kaee) {
+			assertTrue("key not in exception message", kaee.getMessage().contains("task1"));
 			// passed
 		} catch (Exception e) {
 			fail("wrong type of exception was thrown");
