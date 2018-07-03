@@ -25,6 +25,8 @@
 
 		<javac includeantruntime="false"
 		       srcdir="${Jadoop-ex-src}"
+			   source="1.8"
+		       target="1.8"
 		       destdir="${Jadoop-build-ex}">
 			<classpath refid="jadoop.examples.classpath" />
 		</javac>
@@ -40,6 +42,8 @@
 
 		<javac includeantruntime="false"
 		       srcdir="${Jadoop-src}"
+			   source="1.8"
+		       target="1.8"
 		       destdir="${Jadoop-build}/bin">
 			<classpath refid="jadoop.classpath" />
 		</javac>
